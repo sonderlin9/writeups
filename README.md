@@ -1,2 +1,6 @@
 # writeups
-writeups from ctf challenges I solved
+writeups and solutions to ctf challenges I solved
+
+## web
+
+- [Good Intentions](./2022/csaw/good-intentions/writeup.md)
