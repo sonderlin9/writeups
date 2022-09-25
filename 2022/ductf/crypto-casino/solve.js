@@ -60,9 +60,9 @@ const casino_contract = new ethers.Contract(casino_addr, casino_abi, signer);
 			console.log(`next bet wins -> place ${balance} coins`);
 
 			await casino_contract.play(balance, overrides);
-            balance = await casino_contract.balances(wallet_addr, overrides);
+			balance = await casino_contract.balances(wallet_addr, overrides);
 
-            console.log("balance = " + balance);
+			console.log("balance = " + balance);
 
 		} else {
 			// placing a zero bet here to create next block without loosing any coins.
