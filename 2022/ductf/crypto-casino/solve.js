@@ -74,6 +74,6 @@ const casino_contract = new ethers.Contract(casino_addr, casino_abi, signer);
 	}
 
 	tx = await casino_contract.withdraw(1337, overrides);
-	tx.wait();
+	await tx.wait();
 })();
 
