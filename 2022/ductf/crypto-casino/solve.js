@@ -15,7 +15,6 @@ const ducoin_abi = [
 ];
 
 const casino_abi = [
-	"function approve(address _spender, uint256 _value) public returns (bool success)",
 	"function deposit(uint256 amount)",
 	"function withdraw(uint256 amount)",
 	"function play(uint256 bet)",
@@ -33,13 +32,13 @@ const casino_contract = new ethers.Contract(casino_addr, casino_abi, signer);
 	let tx;
 
 	tx = await ducoin_contract.approve(casino_addr, 10000, overrides);
-	tx.wait();
+	await tx.wait();
 
 	tx = await casino_contract.getTrialCoins(overrides);
-	tx.wait();
+	await tx.wait();
 
 	tx = await casino_contract.deposit(7, overrides);
-	tx.wait();
+	await tx.wait();
 
 	let balance = await casino_contract.balances(wallet_addr, overrides);
 
@@ -59,15 +58,18 @@ const casino_contract = new ethers.Contract(casino_addr, casino_abi, signer);
 
 			console.log(`next bet wins -> place ${balance} coins`);
 
-			await casino_contract.play(balance, overrides);
+			tx = await casino_contract.play(balance, overrides);
+			await tx.wait();
+
 			balance = await casino_contract.balances(wallet_addr, overrides);
 
 			console.log("balance = " + balance);
 
 		} else {
-			// placing a zero bet here to create next block without loosing any coins.
+			// placing a zero bet here and wait for next block without loosing any coins.
 
-			await casino_contract.play(0, overrides);
+			tx = await casino_contract.play(0, overrides);
+			await tx.wait();
 		}
 	}
 
