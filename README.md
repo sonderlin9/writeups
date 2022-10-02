@@ -1,6 +1,3 @@
-# writeups
-writeups and solutions to ctf challenges I solved
-
 ## blockchain
 
 - [Crypto Casino](./2022/ductf/crypto-casino/writeup.md)
